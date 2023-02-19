@@ -1,0 +1,9 @@
+# This file is mandatory to be here!
+### Make sure to replace this with your own.
+
+# examples : 
+
+Django==3.2.9
+fastapi
+uvicorn
+flask
