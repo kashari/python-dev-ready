@@ -1,13 +1,16 @@
-# https://hub.docker.com/_/python for any other docker image.
+FROM python:3.11-slim-buster
+RUN mkdir -p /usr/src/app
 
-FROM python:3.11.2-alpine3.17
+WORKDIR /usr/src/app
 
-WORKDIR /app
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-COPY app/requirements.txt /app/
+COPY requirements.txt ./
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install pip --upgrade
+RUN pip install --default-timeout=100 --no-cache-dir -r requirements.txt
 
-COPY app /app/
+COPY . .
 
-CMD ["/bin/bash", "/start-server.sh"]
+CMD ["/bin/bash", "/usr/src/app/start-server.sh"]
